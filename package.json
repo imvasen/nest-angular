@@ -4,11 +4,11 @@
   "scripts": {
     "start:client": "ng serve",
     "build:client": "ng build",
-    "test:client": "ng test",
-    "test:client:e2e": "ng e2e",
+    "test:client": "echo 'Not done yet: We would love help here...'",
+    "test:client:e2e": "echo 'Not done yet: We would love help here...'",
     "lint:client": "ng lint",
     "start:server": "ts-node -r tsconfig-paths/register api/main.ts",
-    "build:server": "rimraf dist && npm run build",
+    "build:server": "rimraf \"dist/!(public)\" && tsc -p tsconfig.build.json",
     "test:server": "jest",
     "test:server:watch": "jest --watch",
     "test:server:cov": "jest --coverage",
@@ -17,7 +17,8 @@
     "lint:server": "tslint -p tsconfig.json -c tslint.json",
     "start:debug": "nodemon --config nodemon-debug.json",
     "start:dev": "nodemon & ng serve",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "build": "npm run build:server && npm run build:client"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,6 @@
     "@nestjs/core": "^5.7.3",
     "core-js": "^2.5.4",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^2.6.3",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
@@ -45,8 +45,6 @@
     "@angular/language-service": "~7.2.0",
     "@nestjs/testing": "^5.7.3",
     "@types/express": "^4.16.1",
-    "@types/jasmine": "~2.8.8",
-    "@types/jasminewd2": "~2.0.3",
     "@types/jest": "^24.0.9",
     "@types/node": "^8.9.5",
     "@types/supertest": "^2.0.7",
@@ -62,6 +60,7 @@
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4",
     "protractor": "~5.4.0",
+    "rimraf": "^2.6.3",
     "supertest": "^3.4.2",
     "ts-jest": "^24.0.0",
     "ts-loader": "^5.3.3",
@@ -69,5 +68,19 @@
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.11.0",
     "typescript": "~3.2.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "api",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "watch": ["api"],
+  "ext": "ts",
+  "ignore": ["api/**/*.spec.ts"],
+  "exec": "ts-node -r tsconfig-paths/register api/main.ts"
+}
